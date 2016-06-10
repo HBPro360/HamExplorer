@@ -1,0 +1,9 @@
+c:\users\jhamm014089\documents\visual studio 2015\Projects\HamExplorer\HamExplorer\bin\Debug\HamExplorer.exe.config
+c:\users\jhamm014089\documents\visual studio 2015\Projects\HamExplorer\HamExplorer\bin\Debug\HamExplorer.exe
+c:\users\jhamm014089\documents\visual studio 2015\Projects\HamExplorer\HamExplorer\bin\Debug\HamExplorer.pdb
+c:\users\jhamm014089\documents\visual studio 2015\Projects\HamExplorer\HamExplorer\obj\Debug\HamExplorer.csprojResolveAssemblyReference.cache
+c:\users\jhamm014089\documents\visual studio 2015\Projects\HamExplorer\HamExplorer\obj\Debug\HamExplorer.frmExplorer.resources
+c:\users\jhamm014089\documents\visual studio 2015\Projects\HamExplorer\HamExplorer\obj\Debug\HamExplorer.Properties.Resources.resources
+c:\users\jhamm014089\documents\visual studio 2015\Projects\HamExplorer\HamExplorer\obj\Debug\HamExplorer.csproj.GenerateResource.Cache
+c:\users\jhamm014089\documents\visual studio 2015\Projects\HamExplorer\HamExplorer\obj\Debug\HamExplorer.exe
+c:\users\jhamm014089\documents\visual studio 2015\Projects\HamExplorer\HamExplorer\obj\Debug\HamExplorer.pdb
