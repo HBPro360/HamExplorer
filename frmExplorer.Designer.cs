@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmExplorer));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnRight = new System.Windows.Forms.Button();
@@ -49,6 +50,9 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.lV = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iLIcon = new System.Windows.Forms.ImageList(this.components);
+            this.iLDetail = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.stStrp.SuspendLayout();
@@ -140,19 +144,19 @@
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             // 
             // viewToolStripMenuItem
@@ -169,6 +173,8 @@
             // 
             // helpToolStripMenuItem
             // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
@@ -220,7 +226,29 @@
             // 
             // columnHeader1
             // 
+            this.columnHeader1.Text = "Name";
             this.columnHeader1.Width = 375;
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // iLIcon
+            // 
+            this.iLIcon.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("iLIcon.ImageStream")));
+            this.iLIcon.TransparentColor = System.Drawing.Color.Transparent;
+            this.iLIcon.Images.SetKeyName(0, "localDisk.jpg");
+            this.iLIcon.Images.SetKeyName(1, "dvdDrive.png");
+            this.iLIcon.Images.SetKeyName(2, "networkDrive.png");
+            this.iLIcon.Images.SetKeyName(3, "flashDrive.png");
+            // 
+            // iLDetail
+            // 
+            this.iLDetail.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("iLDetail.ImageStream")));
+            this.iLDetail.TransparentColor = System.Drawing.Color.Transparent;
+            this.iLDetail.Images.SetKeyName(0, "Folder_32x32.png");
             // 
             // frmExplorer
             // 
@@ -268,6 +296,9 @@
         private System.Windows.Forms.ToolStripStatusLabel tsslStatus;
         private System.Windows.Forms.ListView lV;
         private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ImageList iLIcon;
+        private System.Windows.Forms.ImageList iLDetail;
     }
 }
 
