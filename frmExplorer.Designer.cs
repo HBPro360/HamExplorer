@@ -31,10 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmExplorer));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnRight = new System.Windows.Forms.Button();
+            this.btnForward = new System.Windows.Forms.Button();
             this.cmbBox = new System.Windows.Forms.ComboBox();
             this.txtBox = new System.Windows.Forms.TextBox();
-            this.btnLeft = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,18 +44,23 @@
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stStrp = new System.Windows.Forms.StatusStrip();
             this.tsslStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.tV = new System.Windows.Forms.TreeView();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.lV = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iLIcon = new System.Windows.Forms.ImageList(this.components);
             this.iLDetail = new System.Windows.Forms.ImageList(this.components);
+            this.ctxtMnuEdit = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuCut = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPaste = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.stStrp.SuspendLayout();
+            this.ctxtMnuEdit.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -65,10 +70,10 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.88462F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.11538F));
-            this.tableLayoutPanel1.Controls.Add(this.btnRight, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnForward, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.cmbBox, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtBox, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnLeft, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnBack, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -77,14 +82,15 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(616, 29);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
-            // btnRight
+            // btnForward
             // 
-            this.btnRight.Image = ((System.Drawing.Image)(resources.GetObject("btnRight.Image")));
-            this.btnRight.Location = new System.Drawing.Point(33, 3);
-            this.btnRight.Name = "btnRight";
-            this.btnRight.Size = new System.Drawing.Size(24, 21);
-            this.btnRight.TabIndex = 0;
-            this.btnRight.UseVisualStyleBackColor = true;
+            this.btnForward.Image = ((System.Drawing.Image)(resources.GetObject("btnForward.Image")));
+            this.btnForward.Location = new System.Drawing.Point(33, 3);
+            this.btnForward.Name = "btnForward";
+            this.btnForward.Size = new System.Drawing.Size(24, 21);
+            this.btnForward.TabIndex = 0;
+            this.btnForward.UseVisualStyleBackColor = true;
+            this.btnForward.Click += new System.EventHandler(this.btnForward_Click);
             // 
             // cmbBox
             // 
@@ -101,14 +107,15 @@
             this.txtBox.Size = new System.Drawing.Size(200, 20);
             this.txtBox.TabIndex = 3;
             // 
-            // btnLeft
+            // btnBack
             // 
-            this.btnLeft.Image = ((System.Drawing.Image)(resources.GetObject("btnLeft.Image")));
-            this.btnLeft.Location = new System.Drawing.Point(3, 3);
-            this.btnLeft.Name = "btnLeft";
-            this.btnLeft.Size = new System.Drawing.Size(24, 21);
-            this.btnLeft.TabIndex = 1;
-            this.btnLeft.UseVisualStyleBackColor = true;
+            this.btnBack.Image = ((System.Drawing.Image)(resources.GetObject("btnBack.Image")));
+            this.btnBack.Location = new System.Drawing.Point(3, 3);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(24, 21);
+            this.btnBack.TabIndex = 1;
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // menuStrip1
             // 
@@ -144,19 +151,19 @@
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             // 
             // viewToolStripMenuItem
@@ -178,6 +185,12 @@
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "About";
             // 
             // stStrp
             // 
@@ -229,12 +242,6 @@
             this.columnHeader1.Text = "Name";
             this.columnHeader1.Width = 375;
             // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            // 
             // iLIcon
             // 
             this.iLIcon.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("iLIcon.ImageStream")));
@@ -249,6 +256,34 @@
             this.iLDetail.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("iLDetail.ImageStream")));
             this.iLDetail.TransparentColor = System.Drawing.Color.Transparent;
             this.iLDetail.Images.SetKeyName(0, "Folder_32x32.png");
+            this.iLDetail.Images.SetKeyName(1, "file.gif");
+            // 
+            // ctxtMnuEdit
+            // 
+            this.ctxtMnuEdit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuCut,
+            this.mnuCopy,
+            this.mnuPaste});
+            this.ctxtMnuEdit.Name = "ctxtMnuEdit";
+            this.ctxtMnuEdit.Size = new System.Drawing.Size(103, 70);
+            // 
+            // mnuCut
+            // 
+            this.mnuCut.Name = "mnuCut";
+            this.mnuCut.Size = new System.Drawing.Size(102, 22);
+            this.mnuCut.Text = "Cut";
+            // 
+            // mnuCopy
+            // 
+            this.mnuCopy.Name = "mnuCopy";
+            this.mnuCopy.Size = new System.Drawing.Size(102, 22);
+            this.mnuCopy.Text = "Copy";
+            // 
+            // mnuPaste
+            // 
+            this.mnuPaste.Name = "mnuPaste";
+            this.mnuPaste.Size = new System.Drawing.Size(102, 22);
+            this.mnuPaste.Text = "Paste";
             // 
             // frmExplorer
             // 
@@ -271,14 +306,15 @@
             this.menuStrip1.PerformLayout();
             this.stStrp.ResumeLayout(false);
             this.stStrp.PerformLayout();
+            this.ctxtMnuEdit.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
         #endregion
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button btnRight;
-        private System.Windows.Forms.Button btnLeft;
+        private System.Windows.Forms.Button btnForward;
+        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.ComboBox cmbBox;
         private System.Windows.Forms.TextBox txtBox;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -299,6 +335,10 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ImageList iLIcon;
         private System.Windows.Forms.ImageList iLDetail;
+        private System.Windows.Forms.ContextMenuStrip ctxtMnuEdit;
+        private System.Windows.Forms.ToolStripMenuItem mnuCut;
+        private System.Windows.Forms.ToolStripMenuItem mnuCopy;
+        private System.Windows.Forms.ToolStripMenuItem mnuPaste;
     }
 }
 

@@ -8,18 +8,99 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Collections.Specialized;
 
 namespace HamExplorer
 {
     public partial class frmExplorer : Form
     {
         TreeNode tNodeRt;
+        Stack<String> history = new Stack<string>();
         public frmExplorer()
         {
             InitializeComponent();
             this.tV.NodeMouseClick += TV_NodeMouseClick;
             lV.MouseDoubleClick += LV_MouseDoubleClick;
+            lV.MouseClick += LV_MouseClick;
+            lV.MouseDown += LV_MouseDown;
+            mnuCopy.Click += MnuCopy_Click;
+            mnuPaste.Click += MnuPaste_Click;
+
         }
+
+        private void LV_MouseDown(object sender, MouseEventArgs e)
+        {
+            ListViewHitTestInfo hitTest = lV.HitTest(e.Location);
+
+            switch (e.Button)
+            {
+                case MouseButtons.Right:
+                    if (hitTest != null && hitTest.Item != null)
+                    {
+                        // right clicking an item in the listview
+                        //selectedModule = hitTest.Item.Name;
+
+                        //lV.ContextMenuStrip = mnuContext_OptionsA;
+                    }
+                    else
+                    {
+                        // right clicking in white area of listview
+                        lV.ContextMenuStrip = ctxtMnuEdit;
+                        ctxtMnuEdit.Show(e.Location);
+                    }
+                    break;
+            }
+            //if (lV.SelectedItems != null)
+            //{
+            //    List<string> fullFilePathList = new List<string>();
+            //    foreach (ListViewItem lvi in lV.SelectedItems)
+            //    {
+            //        string fullFilePath = Path.Combine(lvi.Tag.ToString());
+            //        fullFilePathList.Add(fullFilePath);
+            //    }
+            //    CopyFile(fullFilePathList);
+            //}
+        }
+
+        private void MnuPaste_Click(object sender, EventArgs e)
+        {
+            StringCollection files = Clipboard.GetFileDropList();
+            foreach (string fullFilePath in files)
+            {
+                string fileName = Path.GetFileName(fullFilePath);
+                string destinationFullFilePath = Path.Combine(this.cmbBox.Text, fileName);
+                File.Copy(fullFilePath, destinationFullFilePath);
+            }
+            GetDirectories(this.cmbBox.Text);
+        }
+
+        private void MnuCopy_Click(object sender, EventArgs e)
+        {
+            if (lV.SelectedItems != null)
+            {
+                List<string> fullFilePathList = new List<string>();
+                foreach (ListViewItem lvi in lV.SelectedItems)
+                {
+                    string fullFilePath = Path.Combine(lvi.Tag.ToString());
+                    fullFilePathList.Add(fullFilePath);
+                }
+                CopyFile(fullFilePathList);
+                
+            }
+        }
+
+        private void LV_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (lV.FocusedItem.Bounds.Contains(e.Location) == true)
+                {
+                    ctxtMnuEdit.Show(Cursor.Position);
+                }
+
+            }
+        }
+
         private void LV_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (lV.SelectedItems.Count == 1)
@@ -89,7 +170,11 @@ namespace HamExplorer
         {
             DirectoryInfo[] directories;
             string path = Path.Combine(item.Tag.ToString(), item.Text);
+                                                                            //changed how combobox writes history
+            history.Push(path);
+            cmbBox.DataSource = history;
             cmbBox.Text = path;
+
             DirectoryInfo di = new DirectoryInfo(path);
             directories = di.GetDirectories();
             this.lV.Items.Clear();
@@ -109,7 +194,11 @@ namespace HamExplorer
         {
             DirectoryInfo[] directories;
             DirectoryInfo di = new DirectoryInfo(drive);
+
+            history.Push(drive);
+            cmbBox.DataSource = history;
             cmbBox.Text = drive;
+
             directories = di.GetDirectories();
             this.lV.Items.Clear();
             foreach (DirectoryInfo d in directories)
@@ -124,16 +213,43 @@ namespace HamExplorer
             }
             GetFiles(drive);
         }
+
+        private void CopyFile(List<string> ListFilePaths)
+        {
+            StringCollection FileCollection = new StringCollection();
+
+            foreach (string FileToCopy in ListFilePaths)
+            {
+                FileCollection.Add(FileToCopy);
+            }
+            Clipboard.Clear();
+            Clipboard.SetFileDropList(FileCollection);
+        }
+
         public void GetFiles(string folder)
         {
             DirectoryInfo di = new DirectoryInfo(folder);
             FileInfo[] files = di.GetFiles();
             foreach(FileInfo fi in files)
             {
-                ListViewItem li = new ListViewItem(fi.Name);
+                ListViewItem li = new ListViewItem(fi.Name,1);
                 li.Tag = fi.FullName;
                 lV.Items.Add(li);
+                lV.SmallImageList = iLDetail;
             }
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            int currentIndex = cmbBox.Items.Count - 1;
+            int index = currentIndex - 1;
+            string destination = this.cmbBox.Items[index].ToString();
+            GetDirectories(destination);
+        }
+
+        private void btnForward_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
